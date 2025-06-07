@@ -6,22 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('farm_inventory', function (Blueprint $table) {
+        Schema::create('farmers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('farm_name');
+            $table->string('contact_number');
+            $table->text('address');
+            $table->string('farm_type');
+            $table->decimal('total_land_size', 10, 2)->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('farm_inventory');
+        Schema::dropIfExists('farmers');
     }
 };
